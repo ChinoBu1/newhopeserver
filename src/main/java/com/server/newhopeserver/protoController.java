@@ -17,10 +17,6 @@ public class protoController {
     @GetMapping(value = "/msg.proto", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
     public @ResponseBody byte[] getFile() throws IOException {
         InputStream ioStream = new ClassPathResource("/static/msg.proto").getInputStream();
-
-        if (ioStream == null) {
-            throw new IllegalArgumentException("msg.proto" + " is not found");
-        }
         return ioStream.readAllBytes();
 
     }
