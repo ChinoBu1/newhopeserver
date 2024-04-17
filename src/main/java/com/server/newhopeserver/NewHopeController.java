@@ -151,17 +151,17 @@ public class NewHopeController {
                 Polynomial ea = nh.generateBinoPol();
                 Polynomial ea1 = nh.generateBinoPol();
                 Polynomial m = nh.parseSeed(seed);
-                Polynomial pa = polyUtils.PolyModInt(
-                                polyUtils.PolyModF(
-                                                polyUtils.PolySum(
-                                                                polyUtils.PolyMult(m, sa),
+                Polynomial pa = Polynomial.PolyModInt(
+                                Polynomial.PolyModF(
+                                                Polynomial.PolySum(
+                                                                Polynomial.PolyMult(m, sa),
                                                                 ea),
                                                 nh.getF()),
                                 nh.getQ());
-                Polynomial Ka = polyUtils.PolyModInt(
-                                polyUtils.PolyModF(
-                                                polyUtils.PolySum(
-                                                                polyUtils.PolyMult(pb, sa),
+                Polynomial Ka = Polynomial.PolyModInt(
+                                Polynomial.PolyModF(
+                                                Polynomial.PolySum(
+                                                                Polynomial.PolyMult(pb, sa),
                                                                 ea1),
                                                 nh.getF()),
                                 nh.getQ());
@@ -219,17 +219,17 @@ public class NewHopeController {
                 seed = rmessage.getSeed().toByteArray();
 
                 Polynomial m = nh.parseSeed(seed);
-                Polynomial pa = polyUtils.PolyModInt(
-                                polyUtils.PolyModF(
-                                                polyUtils.PolySum(
-                                                                polyUtils.PolyMult(m, sa),
+                Polynomial pa = Polynomial.PolyModInt(
+                                Polynomial.PolyModF(
+                                                Polynomial.PolySum(
+                                                                Polynomial.PolyMult(m, sa),
                                                                 ea),
                                                 nh.getF()),
                                 nh.getQ());
-                Polynomial Ka = polyUtils.PolyModInt(
-                                polyUtils.PolyModF(
-                                                polyUtils.PolySum(
-                                                                polyUtils.PolyMult(pb, sa),
+                Polynomial Ka = Polynomial.PolyModInt(
+                                Polynomial.PolyModF(
+                                                Polynomial.PolySum(
+                                                                Polynomial.PolyMult(pb, sa),
                                                                 ea1),
                                                 nh.getF()),
                                 nh.getQ());
