@@ -58,7 +58,7 @@ public class NewHopeController {
 
                 if (rmessage.polynom().coef().length != n) {
                         errores.put("body", "El polinomio no tiene el numero correcto de coeficientes: "
-                                        + rmessage.polynom().coef().length);
+                                        + n);
                 }
                 if (errores.size() != 0) {
                         throw new badParamException(errores);

@@ -10,6 +10,7 @@ public class badParamException extends RuntimeException {
     }
 
     public badParamException(HashMap<String, String> error) {
+        super();
         badParam = error;
     }
 

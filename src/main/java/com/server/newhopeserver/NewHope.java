@@ -2,15 +2,12 @@ package com.server.newhopeserver;
 
 import java.security.SecureRandom;
 import java.util.Arrays;
-import java.util.Locale;
 import java.util.Random;
 import java.util.Set;
-import java.util.logging.Logger;
 
 import org.bouncycastle.crypto.digests.SHAKEDigest;
 
 public class NewHope {
-    Logger logger = Logger.getLogger("mainNH");
     private final Polynomial F;
     private final int Q = 12289;
     private final int N = 1024;
@@ -202,14 +199,14 @@ public class NewHope {
                     R / q * ((float) temp[i + 3 * n / 4] + (float) .5f * b)
             };
             for (int j = 0; j < R; j++) {
-                resp[i][j] = ((CVP(paramHint, false)[j] % 4) + 4) % 4;
+                resp[i][j] = ((CVP(paramHint)[j] % 4) + 4) % 4;
             }
         }
 
         return resp;
     }
 
-    public int[] CVP(float[] x, boolean log) {
+    public int[] CVP(float[] x) {
         int[] v0 = new int[4];
         int[] v1 = new int[4];
         float norm = 0;
@@ -217,11 +214,6 @@ public class NewHope {
             v0[i] = Math.round(x[i]);
             v1[i] = Math.round(x[i] - G[i]);
             norm = norm + Math.abs(x[i] - v0[i]);
-        }
-        if (log) {
-            logger.info(
-                    String.format(Locale.US, "v0 = ( %d, %d, %d, %d) v1 = ( %d, %d, %d, %d)  ||x-v0|| = %f  ",
-                            v0[0], v0[1], v0[2], v0[3], v1[0], v1[1], v1[2], v1[3], norm));
         }
         if (norm < 1) {
             int[] resp = { (v0[0] - v0[3]),
@@ -250,18 +242,15 @@ public class NewHope {
                     (float) temp[i + n / 2] / q - .25f * (hint[i][2] + .5f * hint[i][3]),
                     (float) temp[i + 3 * n / 4] / q - hint[i][3] * .5f * .25f
             };
-            resp[i] = Decode(decodeParam, false);
+            resp[i] = Decode(decodeParam);
         }
         return resp;
     }
 
-    public int Decode(float[] x, boolean log) {
+    public int Decode(float[] x) {
         float norm = 0;
         for (int i = 0; i < x.length; i++) {
             norm = norm + Math.abs(x[i] - Math.round(x[i]));
-        }
-        if (log) {
-            logger.info(String.format(Locale.US, "Norma: %f                                        ", norm));
         }
         if (norm <= 1)
             return 0;
