@@ -1,5 +1,7 @@
 package com.server.newhopeserver;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 
 import org.springframework.http.HttpHeaders;
@@ -44,7 +46,7 @@ public class NewHopeController {
         public ResponseEntity<jsonResponse> getJson(HttpServletRequest request,
                         @RequestParam(value = "n", defaultValue = "1024") int n,
                         @RequestParam(value = "q", defaultValue = "12289") int q, @RequestBody jsonRequest rmessage)
-                        throws InvalidProtocolBufferException {
+                        throws InvalidProtocolBufferException, NoSuchAlgorithmException {
 
                 final HttpHeaders httpHeaders = new HttpHeaders();
                 HashMap<String, String> errores = new HashMap<String, String>();
@@ -90,7 +92,11 @@ public class NewHopeController {
 
                 int[] SK = nh.Rec(Ka, hint);
                 byte[] K = nh.toByte(SK);
-                for (byte b : K) {
+                byte[] Key;
+                MessageDigest ms = MessageDigest.getInstance("SHA3-256");
+                Key = ms.digest(K);
+
+                for (byte b : Key) {
                         System.out.print(b + " ");
                 }
                 System.out.println();
